@@ -1,0 +1,65 @@
+@mixin constructor(
+  $mc-ns,
+  $mc-convention,
+  $mc-designation,
+  $mc-i,
+  $mc-interval,
+  $mc-start,
+  $mc-impf,
+  $mc-property,
+  $mc-location,
+  $mc-multiplier,
+  $mc-imp,
+  $mc-size: null,
+  $mc-direction: null){
+  .#{$mc-ns}#{$mc-size}#{$mc-direction}-#{$mc-convention}-#{$mc-designation}-#{($mc-i * $mc-interval) + $mc-start}#{$mc-impf} {
+     #{$mc-property}#{$mc-location}: #{(($mc-i * $mc-interval) + $mc-start) * $mc-multiplier}px#{$mc-imp};
+  }
+}
+
+@mixin media(
+  $mc-ns,
+  $mc-convention,
+  $mc-designation,
+  $mc-i,
+  $mc-interval,
+  $mc-start,
+  $mc-impf,
+  $mc-property,
+  $mc-location,
+  $mc-multiplier,
+  $mc-imp,
+  $mc-size,
+  $mm-min: null,
+  $mm-max: null){
+    @if $min and $max {
+    @for $i from 0 through 2 {
+      $direction: null;
+      @if $i == 0 {
+      $string: 'min-width: ' + #{$mm-min};
+      $direction: '-' + $up;
+      } @else if $i == 1 {
+        $string: 'min-width: ' + #{$mm-min} + ') and (max-width: ' +  #{$mm-max};
+      } @else if $i == 2 {
+        $string: 'max-width: ' +  #{$mm-max};
+        $direction: '-' + $dn;
+      }
+      @media (#{$string}) {
+        @include constructor(
+          $mc-ns,
+          $mc-convention,
+          $mc-designation,
+          $mc-i,
+          $mc-interval,
+          $mc-start,
+          $mc-impf,
+          $mc-property,
+          $mc-location,
+          $mc-multiplier,
+          $mc-imp,
+          $mc-size,
+          $direction)
+        }
+    }
+  }
+}

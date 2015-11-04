@@ -1,0 +1,27 @@
+{
+  "name": "Avail",
+  "homepage": "https://github.com/webfox/Avail",
+  "description": "CSS Utility Framework",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "CSS",
+    "Utility",
+    "Framework"
+  ],
+  "authors": [
+    "Otis Wright"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "normalize-css": "normalize.css#~3.0.3"
+  }
+}

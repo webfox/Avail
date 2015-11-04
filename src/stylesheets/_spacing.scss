@@ -1,0 +1,69 @@
+
+$styles: padding pd 1, margin mg 1, margin nm -1;
+$params: a all, l left, t top, r right, b bottom;
+
+@each $style in $styles {
+
+  $property: nth($style, 1);
+  $convention: nth($style, 2);
+  $multiplier: nth($style, 3);
+
+  @for $i from 0 through $real {
+
+    @if (($i * $interval) + $start <= $limit) {
+
+      @each $param in $params {
+
+        $designation: nth($param, 1);
+        $location: if(nth($param, 2) == all, null, '-' + nth($param, 2));
+
+        @for $p from 0 through 1 {
+
+          $imp: if($p == 0, ' !important', null);
+          $impf: if($p == 0, '-i', null);
+
+          @include constructor(
+            $ns,
+            $convention,
+            $designation,
+            $i,
+            $interval,
+            $start,
+            $impf,
+            $property,
+            $location,
+            $multiplier,
+            $imp,
+            null,
+            null);
+
+          @each $break in $breaks {
+
+            @for $k from 0 through 2 {
+
+              $point: '-' + nth($break, 1);
+              $max: if($k > 0, nth($break, 2), null);
+              $min: if($k < 2, nth($break, 3), null);
+
+              @include media(
+                $ns,
+                $convention,
+                $designation,
+                $i,
+                $interval,
+                $start,
+                $impf,
+                $property,
+                $location,
+                $multiplier,
+                $imp,
+                $point,
+                $min,
+                $max);
+            }
+          }
+        }
+      }
+    }
+  }
+}

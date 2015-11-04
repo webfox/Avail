@@ -1,0 +1,28 @@
+$ns: 'ac'; // Name Space
+$up: 'u'; // Up
+$dn: 'd'; // Down
+
+$interval: 5; // Global step interval
+
+$start: 0; // Global start point
+$limit: 20; // Global limit
+
+$real: $limit / $interval; // Calculate real number for iterating
+
+$bp-xs: 480px;
+$bp-xs-mn: $bp-xs;
+$bp-xs-mx: $bp-xs-mn - 1;
+
+$bp-sm: 768px;
+$bp-sm-mn: $bp-sm;
+$bp-sm-mx: $bp-sm-mn - 1;
+
+$bp-md: 992px;
+$bp-md-mn: $bp-md;
+$bp-md-mx: $bp-md-mn - 1;
+
+$bp-lg: 1200px;
+$bp-lg-mn: $bp-lg;
+$bp-lg-mx: $bp-lg-mn - 1;
+
+$breaks: xs $bp-xs-mn $bp-xs-mx, sm $bp-sm-mn $bp-sm-mx, md $bp-md-mn $bp-md-mx, lg $bp-lg-mn $bp-lg-mx;

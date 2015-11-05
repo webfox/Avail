@@ -10,10 +10,14 @@
   $mc-location,
   $mc-multiplier,
   $mc-imp,
+  $mc-secondary: null,
   $mc-size: null,
   $mc-direction: null){
   .#{$mc-ns}#{$mc-size}#{$mc-direction}-#{$mc-convention}-#{$mc-designation}-#{($mc-i * $mc-interval) + $mc-start}#{$mc-impf} {
      #{$mc-property}#{$mc-location}: #{(($mc-i * $mc-interval) + $mc-start) * $mc-multiplier}px#{$mc-imp};
+    @if $mc-secondary {
+      #{$mc-property}#{$mc-secondary}: #{(($mc-i * $mc-interval) + $mc-start) * $mc-multiplier}px#{$mc-imp}
+    }
   }
 }
 
@@ -31,6 +35,7 @@
   $mc-imp,
   $mm-min,
   $mm-max,
+  $mc-secondary: null,
   $mc-size: null,
   $mc-direction: null){
     @if $mm-min and $mm-max {
@@ -58,6 +63,7 @@
           $mc-location,
           $mc-multiplier,
           $mc-imp,
+          $mc-secondary,
           $mc-size,
           $mc-direction)
         }

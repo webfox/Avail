@@ -1,6 +1,6 @@
 
 $styles: padding pd 1, margin mg 1, margin nm -1;
-$params: a all, l left, t top, r right, b bottom;
+$params: a all null, l left null, t top null, r right null, b bottom null, x left right, y top bottom;
 
 @each $style in $styles {
 
@@ -16,6 +16,7 @@ $params: a all, l left, t top, r right, b bottom;
 
         $designation: nth($param, 1);
         $location: if(nth($param, 2) == all, null, '-' + nth($param, 2));
+        $location-secondary: if(nth($param, 3) == null, null, '-' + nth($param, 3));
 
         @for $p from 0 through 1 {
 
@@ -33,7 +34,8 @@ $params: a all, l left, t top, r right, b bottom;
             $property,
             $location,
             $multiplier,
-            $imp);
+            $imp,
+            $location-secondary);
 
           @each $break in $breaks {
 
@@ -57,6 +59,7 @@ $params: a all, l left, t top, r right, b bottom;
                 $imp,
                 $min,
                 $max,
+                $location-secondary,
                 $point);
             }
           }

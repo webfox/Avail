@@ -29,20 +29,21 @@
   $mc-location,
   $mc-multiplier,
   $mc-imp,
-  $mc-size,
-  $mm-min: null,
-  $mm-max: null){
-    @if $min and $max {
+  $mm-min,
+  $mm-max,
+  $mc-size: null,
+  $mc-direction: null){
+    @if $mm-min and $mm-max {
     @for $i from 0 through 2 {
-      $direction: null;
+      $mc-direction: null; // Reset
       @if $i == 0 {
       $string: 'min-width: ' + #{$mm-min};
-      $direction: '-' + $up;
+      $mc-direction: '-' + $up;
       } @else if $i == 1 {
         $string: 'min-width: ' + #{$mm-min} + ') and (max-width: ' +  #{$mm-max};
       } @else if $i == 2 {
         $string: 'max-width: ' +  #{$mm-max};
-        $direction: '-' + $dn;
+        $mc-direction: '-' + $dn;
       }
       @media (#{$string}) {
         @include constructor(
@@ -58,7 +59,7 @@
           $mc-multiplier,
           $mc-imp,
           $mc-size,
-          $direction)
+          $mc-direction)
         }
     }
   }

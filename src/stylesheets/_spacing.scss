@@ -33,9 +33,7 @@ $params: a all, l left, t top, r right, b bottom;
             $property,
             $location,
             $multiplier,
-            $imp,
-            null,
-            null);
+            $imp);
 
           @each $break in $breaks {
 
@@ -57,9 +55,9 @@ $params: a all, l left, t top, r right, b bottom;
                 $location,
                 $multiplier,
                 $imp,
-                $point,
                 $min,
-                $max);
+                $max,
+                $point);
             }
           }
         }

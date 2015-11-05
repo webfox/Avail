@@ -57,7 +57,7 @@ gulp.task('styles', function () {
             errLogToConsole: true
         }).on('error', sass.logError))
         .pipe(autoprefixer(config.autoprefix))
-        .pipe(minify())
+        //.pipe(minify())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(config.dist_stylesheets))
 });

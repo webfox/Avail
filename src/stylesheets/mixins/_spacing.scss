@@ -1,71 +1,74 @@
+
+
 @mixin constructor(
-  $mc-ns,
-  $mc-convention,
-  $mc-designation,
-  $mc-i,
-  $mc-interval,
-  $mc-start,
-  $mc-impf,
-  $mc-property,
-  $mc-location,
-  $mc-multiplier,
-  $mc-imp,
-  $mc-secondary: null,
-  $mc-size: null,
-  $mc-direction: null){
-  .#{$mc-ns}#{$mc-size}#{$mc-direction}-#{$mc-convention}-#{$mc-designation}-#{($mc-i * $mc-interval) + $mc-start}#{$mc-impf} {
-     #{$mc-property}#{$mc-location}: #{(($mc-i * $mc-interval) + $mc-start) * $mc-multiplier}px#{$mc-imp};
-    @if $mc-secondary {
-      #{$mc-property}#{$mc-secondary}: #{(($mc-i * $mc-interval) + $mc-start) * $mc-multiplier}px#{$mc-imp}
+  $namespace, // CSS namespace
+  $property, // Abbreviated css property name (i.e pd for padding)
+  $property-extension, // Abbreviated css property name extension (i.e pd-t for padding-top)
+  $increment, // Loop increments used to generate CSS values and Class name
+  $interval, // Loop increment interval
+  $start, // Loop start point
+  $flag, // Whether or not Class is flagged as !Important
+  $css-property, // The full CSS property (i.e margin)
+  $css-property-extension, // The full CSS property extension (i.e. -top for margin-top)
+  $multiplier, // The loop multiplier intended for use when switching between + and -
+  $important, // The !Important string
+  $secondary-css-property-extension: null, // Optional secondary CSS property used when generating x and y classes
+  $screen-size: null, // The class break point
+  $media-direction: null // The class break point direction
+  ){
+  .#{$namespace}#{$screen-size}#{$media-direction}-#{$property}-#{$property-extension}-#{($increment * $interval) + $start}#{$flag} {
+     #{$css-property}#{$css-property-extension}: #{(($increment * $interval) + $start) * $multiplier}px#{$important};
+    @if $secondary-css-property-extension {
+      #{$css-property}#{$secondary-css-property-extension}: #{(($increment * $interval) + $start) * $multiplier}px#{$important}
     }
   }
 }
 
 @mixin media(
-  $mc-ns,
-  $mc-convention,
-  $mc-designation,
-  $mc-i,
-  $mc-interval,
-  $mc-start,
-  $mc-impf,
-  $mc-property,
-  $mc-location,
-  $mc-multiplier,
-  $mc-imp,
-  $mm-min,
-  $mm-max,
-  $mc-secondary: null,
-  $mc-size: null,
-  $mc-direction: null){
-    @if $mm-min and $mm-max {
+  $namespace,
+  $property,
+  $property-extension,
+  $increment,
+  $interval,
+  $start,
+  $flag,
+  $css-property,
+  $css-property-extension,
+  $multiplier,
+  $important,
+  $minimum,
+  $maximum,
+  $secondary-css-property-extension: null,
+  $screen-size: null,
+  $media-direction: null){
+    @if $minimum and $maximum {
     @for $i from 0 through 2 {
-      $mc-direction: null; // Reset
+      $media-direction: null; // Reset
       @if $i == 0 {
-      $string: 'min-width: ' + #{$mm-min};
-      $mc-direction: '-' + $up;
+      $string: 'min-width: ' + #{$minimum};
+      $media-direction: '-' + $up;
       } @else if $i == 1 {
-        $string: 'min-width: ' + #{$mm-min} + ') and (max-width: ' +  #{$mm-max};
+        $string: 'min-width: ' + #{$minimum} + ') and (max-width: ' +  #{$maximum};
       } @else if $i == 2 {
-        $string: 'max-width: ' +  #{$mm-max};
-        $mc-direction: '-' + $dn;
+        $string: 'max-width: ' +  #{$maximum};
+        $media-direction: '-' + $dn;
       }
       @media (#{$string}) {
         @include constructor(
-          $mc-ns,
-          $mc-convention,
-          $mc-designation,
-          $mc-i,
-          $mc-interval,
-          $mc-start,
-          $mc-impf,
-          $mc-property,
-          $mc-location,
-          $mc-multiplier,
-          $mc-imp,
-          $mc-secondary,
-          $mc-size,
-          $mc-direction)
+          $namespace,
+          $property,
+          $property-extension,
+          $increment,
+          $interval,
+          $start,
+          $flag,
+          $css-property,
+          $css-property-extension,
+          $multiplier,
+          $important,
+          $secondary-css-property-extension,
+          $screen-size,
+          $media-direction)
         }
     }
   }

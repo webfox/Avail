@@ -5,7 +5,7 @@ $dn: 'd' !default; // Down
 $interval: 5 !default; // Global step interval
 
 $start: 0 !default; // Global start point
-$limit: 20 !default; // Global limit
+$limit: 100 !default; // Global limit
 
 $real: $limit / $interval; // Calculate real number for iterating
 
